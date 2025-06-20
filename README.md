@@ -61,14 +61,26 @@ A complete **Hotel Management System Database** project in **MySQL**, designed a
 
 Provided in `reporting_queries.sql`:
 
-1️⃣ List all available rooms  
-2️⃣ Occupancy rate per room type  
-3️⃣ Total revenue by season  
-4️⃣ Revenue per payment method  
-5️⃣ All current bookings with customer names  
-6️⃣ Top 3 customers by total spending  
-7️⃣ List of rooms under maintenance  
-8️⃣ Monthly revenue trend  
+Available rooms for a date range
+
+1️⃣ Available rooms for a date range
+
+2️⃣ Occupancy rate per room type / per month
+
+3️⃣ Total revenue by season or date range
+
+4️⃣ Bookings with outstanding payments
+
+5️⃣ Top 5 customers by number of bookings or spend
+
+6️⃣ Staff who performed check-ins on a specific day
+
+7️⃣ Rooms reserved but not yet checked-in
+
+8️⃣ Services used per booking (with total charges)
+
+9️⃣ Customers with full payments and good feedback (Top Customers)
+  
 
 ---
 
