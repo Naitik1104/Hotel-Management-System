@@ -82,7 +82,7 @@ The following reports are included in `reporting_queries.sql`:
 
 ## 🚀 Author
 
-[Captain Hunt](https://github.com/yourusername)
+(https://github.com/Naitik1104)
 
 ---
 
