@@ -88,11 +88,7 @@ Provided in `reporting_queries.sql`:
 
 ---
 
-## 🚀 Author
 
-[Captain Hunt](https://github.com/yourusername)
-
----
 
 ## ⭐️ Notes
 
