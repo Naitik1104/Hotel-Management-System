@@ -24,9 +24,9 @@ VALUES
 ('Rohit Sharma', '9454545', 'rs45@gmail.com', 'Aadhar', '1234-5678-9876'),
 ('Virat Kohli', '9181818', 'vk18@gmail.com', 'Aadhar', '1234-5678-9876');
 
-INSERT INTO staff (name, role, shift, contact_number, email)
+INSERT INTO staff (name, role, Shift, contact_number, email)
 VALUES
-('Priya Verma', 'Manager', 'Full-Day', '98234567', 'priya@hotel_vistara.com'),
+('Priya Verma', 'Manager', 'Full Day', '98234567', 'priya@hotel_vistara.com'),
 ('Arjun Kapoor', 'Receptionist', 'Morning', '98123456', 'arjun@hotel.com'),
 ('Ramesh Kumar', 'Housekeeping', 'Morning', '98345678', 'ramesh@hotel.com'),
 ('Catherine Fernandes', 'Receptionist', 'Evening', '9845678', 'catf19@gmail.com'),
@@ -104,6 +104,76 @@ VALUES
 (1, 'Sunita Mehra', 'Aadhar', '6666-5555-4444'),
 (2, 'Ravi Kumar', 'Passport', 'P12345678');
 
+INSERT INTO bookings (customer_id, room_id, check_in, check_out, status) VALUES
+(1, 1, '2025-05-10 14:00:00', '2025-05-12 12:00:00', 'checked-out'),
+(2, 3, '2025-06-01 14:00:00', '2025-06-03 12:00:00', 'checked-out'),
+(4, 5, '2025-06-15 14:00:00', '2025-06-18 12:00:00', 'checked-in'),
+
+(3, 2, '2025-10-20 13:00:00', '2025-10-25 11:00:00', 'booked'),
+(5, 6, '2025-10-28 12:00:00', '2025-11-02 10:00:00', 'booked'),
+
+(6, 1, '2025-12-22 14:00:00', '2025-12-26 12:00:00', 'booked'),
+(2, 3, '2025-12-24 14:00:00', '2025-12-27 12:00:00', 'booked'),
+
+(4, 5, '2025-04-05 13:00:00', '2025-04-10 11:00:00', 'checked-out'),
+(5, 2, '2025-03-10 14:00:00', '2025-03-12 12:00:00', 'checked-out'),
+(1, 6, '2025-01-15 13:00:00', '2025-01-20 11:00:00', 'checked-out');
+
+INSERT INTO invoices (booking_id, total_amount) VALUES
+(6, 5500.00),
+(7, 8000.00),
+(8, 12000.00),
+(9, 9000.00),
+(10, 4500.00),
+(11, 6500.00),
+(12, 7200.00),
+(13, 4800.00),
+(14, 3000.00),
+(15, 4000.00);
+select * from payments;
+INSERT INTO payments (booking_id, amount, payment_method) VALUES
+(6, 3000.00, 'UPI'),
+(7, 8000.00, 'Credit Card'),
+(8, 12000.00, 'Cash'),
+(9, 9000.00, 'Cash'),
+(10, 2000.00, 'UPI'),
+(11, 6500.00, 'Cash'),
+(12, 7200.00, 'Debit Card'),
+(13, 4800.00, 'UPI'),
+(14, 3000.00, 'Debit Card'),
+(15, 4000.00, 'Cash');
+
+USE Hotel_Management_System;
+
+INSERT INTO booking_guests (booking_id, guest_name, guest_idproof_type, guest_idproof_number) VALUES
+(6, 'Ananya Rao',     'Aadhar',           '4444-3333-2222'),
+(7, 'Rahul Gupta',    'Passport',         'P87654321'),
+(7, 'Neha Gupta',     'Aadhar',           '2345-6789-0123'),
+(7, 'Sahil Gupta',    'PAN',              'ABCD1234E'),
+(8, 'Priyanka Singh', 'Driving License',  'DL-98765'),
+(8, 'Vivek Kumar',    'Passport',         'P12349876'),
+(8, 'Megha Patel',    'Aadhar',           '1111-2222-3333'),
+(8, 'Rohit Jain',     'PAN',              'WXYZ5678F'),
+(9, 'Arun Mehta',     'Aadhar',           '5555-6666-7777'),
+(11, 'Deepak Sharma', 'Passport',         'P23456789'),
+(11, 'Sunita Sharma', 'Aadhar',           '8888-9999-0000'),
+(12, 'Karan Kapoor',  'Driving License',  'DL-54321'),
+(12, 'Alia Kapoor',   'PAN',              'LMNO1234P'),
+(12, 'Rohan Kapoor',  'Aadhar',           '2222-3333-4444'),
+(13, 'Sneha Rao',     'Passport',         'P34561234'),
+(13, 'Amit Rao',      'Aadhar',           '7777-8888-9999'),
+(13, 'Pooja Rao',     'PAN',              'QRST5678'),
+(13, 'Vikram Rao',    'Driving License',  'DL-67890'),
+(14, 'Kavita Desai',  'Aadhar',           '1010-2020-3030'),
+(15, 'Manoj Singh',   'Passport',         'P45612378');
+
+INSERT INTO staff_activity_log (staff_id, booking_id, action_type, action_details, action_time) VALUES
+(2, 1, 'check-in', 'Checked in customer for booking 1', '2025-06-20 09:15:00'),
+(3, 2, 'check-in', 'Checked in customer for booking 2', '2025-06-20 10:00:00'),
+(4, 3, 'check-in', 'Checked in customer for booking 3', '2025-06-21 11:30:00'),
+(2, 4, 'check-in', 'Checked in customer for booking 4', '2025-06-20 14:00:00'),
+(5, 5, 'check-in', 'Checked in customer for booking 5', '2025-06-22 15:45:00'),
+(1, 6, 'check-out', 'Checked out customer for booking 6', '2025-06-23 11:00:00');
 
 
 
