@@ -80,16 +80,5 @@ The following reports are included in `reporting_queries.sql`:
 
 ---
 
-## 🚀 Author
 
-(https://github.com/Naitik1104)
 
----
-
-## ⭐️ Final Notes
-
-This is a **professional-grade MySQL project** — demonstrating clean schema, business logic (via triggers), dynamic calculations (via views), and advanced reporting.
-
-Perfect for any beginner-intermediate MySQL engineer or internship submission!
-
----
