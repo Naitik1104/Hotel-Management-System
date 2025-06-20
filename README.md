@@ -1,84 +1,102 @@
 # Hotel Management System Database 📚🏨
 
-A complete and fully working **Hotel Management System Database** project built in **MySQL** — developed as part of an internship assignment for real-world hotel operations.
-
-This system models a modern hotel — handling:
-
-✅ Room management  
-✅ Seasonal pricing  
-✅ Bookings & services  
-✅ Invoicing & payments  
-✅ Customer feedback  
-✅ Staff activity tracking  
-✅ Advanced reports for hotel business insights
+A complete **Hotel Management System Database** project in **MySQL**, designed as part of an internship assignment — to demonstrate real-world hotel operations modeled via database design, business logic, and advanced reporting.
 
 ---
 
 ## 📂 Project Structure
 
-| File                  | Purpose                          |
-|-----------------------|----------------------------------|
-| `schema.sql`          | Full database table structure     |
-| `data.sql`            | Sample data inserts               |
-| `logic.sql`           | Triggers, Views, Procedures       |
-| `reporting_queries.sql`| Advanced reporting SQL queries    |
+| File                    | Purpose                          |
+|-------------------------|----------------------------------|
+| `schema.sql`            | Full database structure           |
+| `data.sql`              | Sample data inserts               |
+| `logic.sql`             | Triggers, Views, Procedures       |
+| `reporting_queries.sql` | Advanced reporting SQL queries    |
+| `README.md`             | Project documentation             |
+| `ER_Diagram.png`        | Visual ER Diagram                 |
+
+---
+
+## 🗺️ ER Diagram
+
+![ER Diagram](hote_management_sys_ER.png)
+
 
 ---
 
 ## 🚀 Features Implemented
 
-- Room types & pricing
-- Seasonal price adjustments
-- Bookings and multi-guest handling
-- Invoices auto-linked with payments (via view)
-- Staff action logs
+- Room types & seasonal pricing
+- Real-time room availability & status tracking
+- Bookings (multi-guest support)
+- Invoice & payments (auto-calculated via view)
+- Room services & billing
+- Staff activity logs
 - Customer feedback system
-- Services & booking services
-- Room status logs
-- Dynamic reporting queries
-- Triggers to auto-track booking status and total bookings
-- Procedure to get available rooms
+- Booking history archive
+- Dynamic reporting queries for managers
 
 ---
 
-## 📋 How to Run
+## 📋 Core Processes Explained
 
-1️⃣ Open MySQL Workbench or any MySQL Client  
-2️⃣ Run: `schema.sql` → creates tables  
-3️⃣ Run: `logic.sql` → creates triggers, views, procedure  
-4️⃣ Run: `data.sql` → inserts sample data  
-5️⃣ Run: `reporting_queries.sql` → test business reports  
+### 🏨 Check-in / Check-out Flow
+
+- `bookings.status` tracks **check-in** and **check-out**  
+- Trigger `booking_status_update` inserts status change logs  
+- Trigger `total_bookings_update` tracks room type popularity  
+- `rooms.current_status` updated in sync with booking status
+
+### 💰 Pricing & Invoicing Flow
+
+- Base pricing from `room_types.base_price`  
+- Adjusted by `seasonal_pricing`  
+- Invoices generated per booking in `invoices`  
+- Payments logged in `payments`  
+- View `view_invoices_paid` auto-computes current balance
 
 ---
 
-## 📊 Advanced Reporting Queries
+## 📊 Reporting Queries
 
-The following reports are included in `reporting_queries.sql`:
+Provided in `reporting_queries.sql`:
 
 1️⃣ List all available rooms  
-2️⃣ Occupancy rate per room type (example query)  
+2️⃣ Occupancy rate per room type  
 3️⃣ Total revenue by season  
-4️⃣ Total payments received per payment method  
-5️⃣ List of all bookings with customer name & status  
+4️⃣ Revenue per payment method  
+5️⃣ All current bookings with customer names  
 6️⃣ Top 3 customers by total spending  
 7️⃣ List of rooms under maintenance  
-8️⃣ Monthly revenue trend (last 6 months)
+8️⃣ Monthly revenue trend  
+
+---
+
+## 🖥️ How to Run
+
+1️⃣ Run `schema.sql` → creates tables  
+2️⃣ Run `logic.sql` → creates triggers, views, procedures  
+3️⃣ Run `data.sql` → inserts sample data  
+4️⃣ Run `reporting_queries.sql` → test reporting queries  
 
 ---
 
 ## 💻 Tech Stack
 
-- MySQL 8.x
-- SQL (DDL, DML, Views, Triggers, Procedures)
+- MySQL 8.x  
+- SQL (DDL, DML, Triggers, Views, Procedures)
 
 ---
 
-## 📌 Notes
+## 🚀 Author
 
-- Designed as part of an **internship shortlisting assignment**  
-- The goal was to simulate real-world hotel DB handling — with clean professional design, easy extensibility, and meaningful reports for hotel managers
+[Captain Hunt](https://github.com/yourusername)
 
 ---
 
+## ⭐️ Notes
 
-
+- Project designed as part of an **internship shortlisting assignment**  
+- Includes full ER diagram (PNG)  
+- Covers core hotel management processes  
+- All reporting queries implemented  
