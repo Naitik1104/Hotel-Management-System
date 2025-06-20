@@ -19,7 +19,7 @@ A complete **Hotel Management System Database** project in **MySQL**, designed a
 
 ## 🗺️ ER Diagram
 
-![ER Diagram](hote_management_sys_ER.png)
+![ER Diagram](hotel_management_sys_ER.png)
 
 
 ---
