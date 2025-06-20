@@ -1,4 +1,6 @@
 use Hotel_Management_System;
+
+
 -- 1. Available rooms between '2025-06-19' and '2025-06-20'
 SELECT r.room_id, r.room_number
 FROM rooms r
