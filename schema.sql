@@ -1,91 +1,173 @@
-USE Hotel_Management_System;
+use Hotel_management_system;
 
-INSERT INTO room_types (type_name, base_price, amenities) VALUES 
-('Single', 3000.00, 'TV, Wi-Fi, AC, Fridge, Single Bed'),
-('Double', 4500.00, 'TV, Wi-Fi, AC, Fridge, Balcony, King-Size Bed'),
-('Suite', 8500.00, 'TV, Wi-Fi, AC, Fridge, Balcony, King-Size Bed, Jacuzi, Kitchen');
+CREATE TABLE room_types (
+    type_name VARCHAR(20) PRIMARY KEY,
+    base_price DECIMAL(10,2) NOT NULL,
+    amenities TEXT,
+    no_of_rooms INT DEFAULT 0,
+    total_bookings INT DEFAULT 0
+);
 
-INSERT INTO rooms (room_number, room_type_name, capacity, floor, current_status, price_category) VALUES
-('101', 'Suite', 4, 1, 'available', 'suite'),
-('102', 'Single', 1, 1, 'available', 'standard'),
-('201', 'Suite', 4, 2, 'occupied', 'suite'),
-('202', 'Double', 2, 2, 'available', 'premium'),
-('301', 'Suite', 4, 3, 'reserved', 'suite'),
-('302', 'Single', 1, 3, 'available', 'standard'),
-('303', 'Double', 2, 3, 'maintenance', 'premium');
+CREATE TABLE rooms (
+    room_id INT PRIMARY KEY AUTO_INCREMENT,
+    room_number VARCHAR(10) UNIQUE NOT NULL,
+    room_type_name VARCHAR(20) NOT NULL,
+    capacity INT NOT NULL,
+    floor INT NOT NULL,
+    current_status ENUM('available','occupied','maintenance','reserved') NOT NULL DEFAULT 'available',
+    price_category ENUM('standard', 'premium', 'deluxe', 'suite') NOT NULL,
+    
+    FOREIGN KEY (room_type_name) REFERENCES room_types(type_name)
+);
 
-INSERT INTO customers (name, contact_number, email, id_proof_type, id_proof_number) VALUES
-('Krishnan Chettiar', '9123', 'krishc@gmail.com', 'Aadhar', '1234-5678-9876'),
-('Riya Sharma', '909090', 'riya123@yahoo.com', 'Passport', 'M12345678'),
-('Harsh Dodeja', '91234', 'harshdodeja@hotmail.com', 'Driving License', 'DL-45231'),
-('Sita Devi', '987612', 'sita@gmail.com', 'PAN', 'ABCDE1234F'),
-('Rohit Sharma', '9454545', 'rs45@gmail.com', 'Aadhar', '1234-5678-9876'),
-('Virat Kohli', '9181818', 'vk18@gmail.com', 'Aadhar', '1234-5678-9876');
+CREATE TABLE room_status_log (
+    log_id INT PRIMARY KEY AUTO_INCREMENT,
+    room_id INT NOT NULL,
+    previous_status ENUM('available','occupied','maintenance','reserved'),
+    new_status ENUM('available','occupied','maintenance','reserved') NOT NULL,
+    changed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id)
+);
 
-INSERT INTO staff (name, role, shift, contact_number, email) VALUES
-('Priya Verma', 'Manager', 'Full-Day', '98234567', 'priya@hotel_vistara.com'),
-('Arjun Kapoor', 'Receptionist', 'Morning', '98123456', 'arjun@hotel.com'),
-('Ramesh Kumar', 'Housekeeping', 'Morning', '98345678', 'ramesh@hotel.com'),
-('Catherine Fernandes', 'Receptionist', 'Evening', '9845678', 'catf19@gmail.com'),
-('Jai Shukla', 'Security', 'Night', '984548', 'jaishukla@gmail.com'),
-('Sheila Sen', 'Kitchen', 'Fluctuating', '909678', 'sheilasennn@gmail.com');
+----
 
-INSERT INTO services (service_name, service_description, service_price) VALUES
-('Breakfast', 'Continental Breakfast Buffet', 500.00),
-('Spa', 'Full body spa session', 2500.00),
-('Laundry', 'Wash & Iron per kg', 300.00),
-('Airport Pickup', 'Pickup from airport', 1000.00);
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    contact_number VARCHAR(15) NOT NULL,
+    email VARCHAR(100),
+    id_proof_type ENUM('Aadhar','Passport','Driving License','PAN','Other') NOT NULL,
+    id_proof_number VARCHAR(50) NOT NULL,
+    registration_date DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 
-INSERT INTO seasonal_pricing (season_name, room_type_name, start_date, end_date, season_price) VALUES
-('Diwali', 'Single', '2025-10-15', '2025-11-10', 4300.00),
-('Diwali', 'Double', '2025-10-15', '2025-11-10', 7800.00),
-('Diwali', 'Suite', '2025-10-15', '2025-11-10', 12000.00),
-('Christmas', 'Single', '2025-12-20', '2026-01-05', 4000.00),
-('Christmas', 'Double', '2025-12-20', '2026-01-05', 700.00),
-('Christmas', 'Suite', '2025-12-20', '2026-01-05', 10000.00),
-('Summer Peak', 'Double', '2025-05-01', '2025-06-30', 8000.00),
-('Summer Peak', 'Suite', '2025-05-01', '2025-06-30', 12500.00);
+CREATE TABLE bookings (
+    booking_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    room_id INT NOT NULL,
+    check_in DATETIME NOT NULL,
+    check_out DATETIME NOT NULL,
+    status ENUM('booked','checked-in','checked-out','cancelled') NOT NULL DEFAULT 'booked',
+    
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id)
+);
 
-INSERT INTO bookings (customer_id, room_id, check_in, check_out, status) VALUES
-(1, 1, '2025-06-20 14:00:00', '2025-06-22 12:00:00', 'booked'),
-(2, 2, '2025-06-19 12:00:00', '2025-06-21 11:00:00', 'checked-in'),
-(3, 3, '2025-06-15 14:00:00', '2025-06-17 12:00:00', 'checked-out'),
-(4, 5, '2025-06-18 14:00:00', '2025-06-21 12:00:00', 'cancelled'),
-(5, 6, '2025-06-21 13:00:00', '2025-06-24 11:00:00', 'booked');
+CREATE TABLE booking_guests (
+    guest_id INT PRIMARY KEY AUTO_INCREMENT,
+    booking_id INT NOT NULL,
+    guest_name VARCHAR(100) NOT NULL,
+    guest_id_proof_type ENUM('Aadhar','Passport','Driving License','PAN','Other'),
+    guest_id_proof_number VARCHAR(50),
+    
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id)
+);
 
-INSERT INTO invoices (booking_id, total_amount) VALUES
-(1, 5000.00),
-(2, 4500.00),
-(3, 8500.00),
-(4, 4000.00),
-(5, 6000.00);
+CREATE TABLE customer_feedback (
+    feedback_id INT PRIMARY KEY AUTO_INCREMENT,
+    booking_id INT NOT NULL,
+    rating INT CHECK (rating >= 1 AND rating <= 5),
+    comments TEXT,
+    feedback_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id)
+);
 
-INSERT INTO payments (booking_id, amount_paid, payment_method) VALUES
-(1, 2000.00, 'UPI'),
-(2, 3000.00, 'Card'),
-(3, 8500.00, 'Cash'),
-(1, 1000.00, 'UPI'),
-(5, 4500.00, 'UPI');
+----
 
-INSERT INTO booking_services (booking_id, service_id, quantity) VALUES
-(1, 1, 2),
-(1, 2, 1),
-(2, 3, 3),
-(3, 4, 1),
-(5, 1, 1);
+CREATE TABLE payments (
+    payment_id INT PRIMARY KEY AUTO_INCREMENT,
+    booking_id INT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    payment_method ENUM('Cash', 'Debit Card', 'Credit Card', 'UPI', 'Netbanking') NOT NULL,
+    payment_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id)
+);
 
-INSERT INTO room_status_log (room_id, previous_status, new_status) VALUES
-(1, 'available', 'occupied'),
-(2, 'available', 'occupied'),
-(3, 'occupied', 'available'),
-(5, 'reserved', 'available');
+CREATE TABLE invoices (
+    invoice_id INT PRIMARY KEY AUTO_INCREMENT,
+    booking_id INT NOT NULL,
+    invoice_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total_amount DECIMAL(10,2) NOT NULL,
+    
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id)
+);
 
-INSERT INTO customer_feedback (booking_id, rating, comments) VALUES
-(3, 5, 'Amazing stay! Loved the service.'),
-(2, 3, 'Good experience but room was a bit noisy.'),
-(1, 5, 'Very comfortable and staff was friendly.');
+----
 
-INSERT INTO booking_guests (booking_id, guest_name, guest_id_proof_type, guest_id_proof_number) VALUES
-(1, 'Ankit Mehra', 'Aadhar', '9999-8888-7777'),
-(1, 'Sunita Mehra', 'Aadhar', '6666-5555-4444'),
-(2, 'Ravi Kumar', 'Passport', 'P12345678');
+CREATE TABLE staff (
+    staff_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    shift ENUM('Morning','Evening','Night','Full Day','Fluctuating') NOT NULL,
+    role ENUM('Receptionist','Manager','Housekeeping','Kitchen','Maintenance','Security','Other') NOT NULL,
+    contact_number VARCHAR(15) NOT NULL,
+    email VARCHAR(100)
+);
+
+CREATE TABLE staff_activity_log (
+    log_id INT PRIMARY KEY AUTO_INCREMENT,
+    staff_id INT NOT NULL,
+    booking_id INT,
+    action_type ENUM('Check-In','Check-Out','Room Assignment','Room Status Change','Cleaning','Other') NOT NULL,
+    action_details TEXT,
+    action_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (staff_id) REFERENCES staff(staff_id),
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id)
+);
+    
+----
+
+CREATE TABLE services (
+    service_id INT PRIMARY KEY AUTO_INCREMENT,
+    service_name VARCHAR(100) UNIQUE NOT NULL,
+    service_description TEXT,
+    service_price DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE booking_services (
+    booking_service_id INT PRIMARY KEY AUTO_INCREMENT,
+    booking_id INT NOT NULL,
+    service_id INT NOT NULL,
+    quantity INT DEFAULT 1,
+    
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id),
+    FOREIGN KEY (service_id) REFERENCES services(service_id)
+);
+
+----
+
+CREATE TABLE seasonal_pricing (
+    season_id INT PRIMARY KEY AUTO_INCREMENT,
+    season_name VARCHAR(50) NOT NULL,
+    room_type_name VARCHAR(20) NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    season_price DECIMAL(10,2) NOT NULL,
+    
+    FOREIGN KEY (room_type_name) REFERENCES room_types(type_name)
+);
+
+CREATE TABLE room_pricing_history (
+    history_id INT PRIMARY KEY AUTO_INCREMENT,
+    room_type_name VARCHAR(20) NOT NULL,
+    old_price DECIMAL(10,2) NOT NULL,
+    new_price DECIMAL(10,2) NOT NULL,
+    changed_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (room_type_name) REFERENCES room_types(type_name)
+);
+
+CREATE TABLE booking_history (
+    history_id INT PRIMARY KEY AUTO_INCREMENT,
+    booking_id INT,
+    customer_id INT,
+    room_id INT,
+    check_in DATETIME,
+    check_out DATETIME,
+    status ENUM('booked','checked-in','checked-out','cancelled'),
+    archived_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
