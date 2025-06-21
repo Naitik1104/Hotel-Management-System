@@ -13,7 +13,7 @@ A complete **Hotel Management System Database** project in **MySQL**, designed a
 | `logic.sql`             | Triggers, Views, Procedures       |
 | `reporting_queries.sql` | Advanced reporting SQL queries    |
 | `README.md`             | Project documentation             |
-| `ER_Diagram.png`        | Visual ER Diagram                 |
+| `hotel_management_system.png`        | Visual ER Diagram                 |
 
 ---
 
