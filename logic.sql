@@ -8,7 +8,6 @@ FOR EACH ROW
 BEGIN
     DECLARE new_room_status ENUM('available', 'occupied', 'reserved', 'maintenance');
 
-    -- Map booking.status to room_status:
     SET new_room_status = CASE NEW.status
         WHEN 'booked' THEN 'reserved'
         WHEN 'checked-in' THEN 'occupied'
@@ -18,11 +17,9 @@ BEGIN
     END;
 
     IF OLD.status != NEW.status THEN
-        -- Insert into room_status_log
         INSERT INTO room_status_log (room_id, previous_status, new_status, changed_at)
         VALUES (NEW.room_id, (SELECT current_status FROM rooms WHERE room_id = NEW.room_id), new_room_status, NOW());
 
-        -- Update room current_status
         UPDATE rooms
         SET current_status = new_room_status
         WHERE room_id = NEW.room_id;
