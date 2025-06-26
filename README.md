@@ -57,7 +57,7 @@ A complete **Hotel Management System Database** project in **MySQL**, designed a
 
 ---
 
-## 📊 Reporting Queries
+## Reporting Queries
 
 Provided in `reporting_queries.sql`:
 
