@@ -4,7 +4,7 @@ A complete **Hotel Management System Database** project in **MySQL**, designed a
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 | File                    | Purpose                          |
 |-------------------------|----------------------------------|
@@ -17,14 +17,14 @@ A complete **Hotel Management System Database** project in **MySQL**, designed a
 
 ---
 
-## 🗺️ ER Diagram
+## ER Diagram
 
 ![ER Diagram](hotel_management_sys_ER.png)
 
 
 ---
 
-## 🚀 Features Implemented
+## Features Implemented
 
 - Room types & seasonal pricing
 - Real-time room availability & status tracking
@@ -38,16 +38,16 @@ A complete **Hotel Management System Database** project in **MySQL**, designed a
 
 ---
 
-## 📋 Core Processes Explained
+## Core Processes Explained
 
-### 🏨 Check-in / Check-out Flow
+### Check-in / Check-out Flow
 
 - `bookings.status` tracks **check-in** and **check-out**  
 - Trigger `booking_status_update` inserts status change logs  
 - Trigger `total_bookings_update` tracks room type popularity  
 - `rooms.current_status` updated in sync with booking status
 
-### 💰 Pricing & Invoicing Flow
+### Pricing & Invoicing Flow
 
 - Base pricing from `room_types.base_price`  
 - Adjusted by `seasonal_pricing`  
@@ -84,7 +84,7 @@ Available rooms for a date range
 
 ---
 
-## 🖥️ How to Run
+##  How to Run
 
 1️⃣ Run `schema.sql` → creates tables  
 2️⃣ Run `logic.sql` → creates triggers, views, procedures  
@@ -93,7 +93,7 @@ Available rooms for a date range
 
 ---
 
-## 💻 Tech Stack
+## Tech Stack
 
 - MySQL 8.x  
 - SQL (DDL, DML, Triggers, Views, Procedures)
