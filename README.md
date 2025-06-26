@@ -1,6 +1,6 @@
 # Hotel Management System Database 
 
-A complete **Hotel Management System Database** project in **MySQL**, designed as part of an internship assignment for Devify X — to demonstrate real-world hotel operations modeled via database design, business logic, and advanced reporting.
+A complete **Hotel Management System Database** project in **MySQL**, designed as part of an internship assignment — to demonstrate real-world hotel operations modeled via database design, business logic, and advanced reporting.
 
 ---
 
